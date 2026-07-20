@@ -1,0 +1,311 @@
+/* ==========================================================================
+   style.css
+   ==========================================================================
+   This file controls the LOOK of the app: colors, spacing, fonts, card
+   shapes, animations, and how everything rearranges on small screens
+   (responsive design). Comments throughout explain each section.
+   ========================================================================== */
+
+/* ---- CSS Variables: change these to re-theme the entire app ---- */
+:root {
+  --primary: #4f8ef7;
+  --primary-dark: #2f6fe0;
+  --accent: #ff9f43;
+  --bg: #f4f7fb;
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(31, 41, 55, 0.08);
+  --shadow-hover: 0 12px 32px rgba(31, 41, 55, 0.14);
+}
+
+/* ---- Reset default browser spacing so our layout is predictable ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* ============================= NAVBAR ============================= */
+.navbar {
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============================= HERO ============================= */
+.hero {
+  background: linear-gradient(135deg, var(--primary), #7bb8ff);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 1.05rem;
+  opacity: 0.95;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================= LAYOUT ============================= */
+.container {
+  max-width: 1100px;
+  margin: -40px auto 40px auto; /* pulls the form card up over the hero */
+  padding: 0 20px;
+}
+
+/* ============================= CARDS (shared style) ============================= */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ============================= FORM CARD ============================= */
+.form-card {
+  max-width: 560px;
+  margin: 0 auto;
+  animation: fadeInUp 0.5s ease;
+}
+.form-card h2 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-dark);
+}
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+.form-row .form-group {
+  flex: 1;
+}
+label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+input, select {
+  padding: 12px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #fafcff;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.15);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-box {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+/* ============================= LOADING SPINNER ============================= */
+.loading {
+  text-align: center;
+  margin: 40px 0;
+  color: var(--text-muted);
+}
+.spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 12px auto;
+  border: 4px solid #dbeafe;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================= RESULTS SECTION ============================= */
+.results {
+  margin-top: 40px;
+  animation: fadeInUp 0.5s ease;
+}
+.results-heading {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.stat-card i {
+  font-size: 1.6rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.advice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.advice-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-dark);
+}
+.advice-card p {
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #fff7ed, #fff);
+  border: 1px solid #fed7aa;
+}
+.summary-card i {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+.summary-card p {
+  font-weight: 500;
+}
+
+/* ============================= FOOTER ============================= */
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ============================= UTILITY ============================= */
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================= RESPONSIVE (mobile) ============================= */
+@media (max-width: 720px) {
+  .results-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .advice-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .hero {
+    padding: 44px 16px;
+  }
+}

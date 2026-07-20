@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Weather Advisor</title>
+
+<!-- Google Font for a modern look -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Free icon library (Font Awesome) for weather/activity icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============================= NAVBAR ============================= -->
+  <header class="navbar">
+    <div class="navbar-content">
+      <div class="logo"><i class="fa-solid fa-cloud-sun"></i> AI Weather Advisor</div>
+    </div>
+  </header>
+
+  <!-- ============================= HERO SECTION ============================= -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Plan Smarter. Weather Ready.</h1>
+      <p>Get AI-powered advice on clothing, timing, and safety — tailored to your city, date, and activity.</p>
+    </div>
+  </section>
+
+  <!-- ============================= MAIN CONTENT ============================= -->
+  <main class="container">
+
+    <!-- ---------- FORM CARD ---------- -->
+    <section class="card form-card">
+      <h2><i class="fa-solid fa-pen-to-square"></i> Tell us your plan</h2>
+      <form id="weatherForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Sarthak" required />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="e.g. Goa" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="activity">Activity</label>
+          <select id="activity" name="activity" required>
+            <option value="" disabled selected>Select an activity</option>
+            <option value="Travel">🧳 Travel</option>
+            <option value="Picnic">🧺 Picnic</option>
+            <option value="Wedding">💍 Wedding</option>
+            <option value="Cricket">🏏 Cricket</option>
+            <option value="Beach">🏖️ Beach</option>
+            <option value="Hiking">🥾 Hiking</option>
+            <option value="Other">✨ Other</option>
+          </select>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-primary">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Get AI Advice
+        </button>
+      </form>
+
+      <!-- Error message box (hidden until needed) -->
+      <div id="errorBox" class="error-box hidden"></div>
+    </section>
+
+    <!-- ---------- LOADING SPINNER ---------- -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>Fetching weather &amp; generating advice...</p>
+    </div>
+
+    <!-- ---------- RESULTS SECTION (filled dynamically by JS) ---------- -->
+    <section id="results" class="results hidden">
+
+      <h2 class="results-heading"><i class="fa-solid fa-circle-check"></i> Your Weather Advice</h2>
+
+      <div class="results-grid">
+        <!-- Weather stat cards -->
+        <div class="card stat-card">
+          <i class="fa-solid fa-temperature-half"></i>
+          <span class="stat-label">Temperature</span>
+          <span class="stat-value" id="statTemp">--</span>
+        </div>
+        <div class="card stat-card">
+          <i class="fa-solid fa-cloud"></i>
+          <span class="stat-label">Condition</span>
+          <span class="stat-value" id="statCondition">--</span>
+        </div>
+        <div class="card stat-card">
+          <i class="fa-solid fa-droplet"></i>
+          <span class="stat-label">Humidity</span>
+          <span class="stat-value" id="statHumidity">--</span>
+        </div>
+        <div class="card stat-card">
+          <i class="fa-solid fa-wind"></i>
+          <span class="stat-label">Wind Speed</span>
+          <span class="stat-value" id="statWind">--</span>
+        </div>
+      </div>
+
+      <div class="advice-grid">
+        <div class="card advice-card">
+          <h3><i class="fa-solid fa-shirt"></i> Clothing Suggestion</h3>
+          <p id="adviceClothing">--</p>
+        </div>
+        <div class="card advice-card">
+          <h3><i class="fa-solid fa-umbrella"></i> Umbrella Recommendation</h3>
+          <p id="adviceUmbrella">--</p>
+        </div>
+        <div class="card advice-card">
+          <h3><i class="fa-solid fa-clock"></i> Best Time for Activity</h3>
+          <p id="adviceBestTime">--</p>
+        </div>
+        <div class="card advice-card">
+          <h3><i class="fa-solid fa-shield-halved"></i> Safety Tips</h3>
+          <p id="adviceSafety">--</p>
+        </div>
+      </div>
+
+      <div class="card summary-card">
+        <i class="fa-solid fa-robot"></i>
+        <p id="adviceSummary">--</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Built with Flask, OpenWeather API &amp; AI &mdash; a learning project.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
